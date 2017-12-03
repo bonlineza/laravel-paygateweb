@@ -1,0 +1,27 @@
+{
+    "name": "misterbrownrsa/paygateweb",
+    "description": "Adding PayGateWeb to Laravel IoC for ease of use and laravel flair",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Duwayne Brown",
+            "email": "duwayne@hashtec.co.za"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "MisterBrownRSA\\PayGateWeb\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=7.0",
+        "nesbot/carbon": "^1.22"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "MisterBrownRSA\\PayGateWeb\\PayGateProvider"
+            ]
+        }
+    }
+}
