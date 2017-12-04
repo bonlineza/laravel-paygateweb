@@ -2,8 +2,6 @@
 
     namespace MisterBrownRSA\PayGateWeb;
 
-    use Carbon\Carbon;
-
     /**
      * A service class that wraps the main calls that can be done to DHL
      */
@@ -26,7 +24,6 @@
 
         private $checksum;
 
-        private $initiateRequest;
         private $processRequest;
 
         public function __construct($options = [])
@@ -34,7 +31,7 @@
             $this->encryption_key = getenv('PAYGATE_SECRET') ?: config('paygate.secret', 'secret');
             $this->paygate_id = getenv('PAYGATE_ID') ?: config('paygate.ID', '10011072130');
             $this->currency = getenv('PAYGATE_CURRENCY') ?: config('paygate.currency', 'USD');
-            $this->transaction_date = Carbon::now()->toDateTimeString();
+            $this->transaction_date = date('Y-m-d H:i:s');
             $this->locale = getenv('PAYGATE_LOCALE') ?: config('paygate.locale', 'en-za');
 
             $_SESSION['paygate']['pgid'] = $this->paygate_id;
