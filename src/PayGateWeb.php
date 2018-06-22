@@ -48,7 +48,7 @@ class PayGateWeb
     public function create($options = [])
     {
         if (empty($options)) {
-            return FALSE;
+            return false;
         }
 
         foreach ($options as $key => $value) {
@@ -61,7 +61,7 @@ class PayGateWeb
         return $this;
     }
 
-    public function reference(string $stringValue = NULL)
+    public function reference(string $stringValue = null)
     {
         if (empty($stringValue)) {
             return $this->reference;
@@ -72,7 +72,7 @@ class PayGateWeb
         return $this;
     }
 
-    public function amount($floatValue = NULL)
+    public function amount($floatValue = null)
     {
         if (empty($floatValue)) {
             return $this->amount;
@@ -92,7 +92,7 @@ class PayGateWeb
         return $this;
     }
 
-    public function returnURL(string $URL = NULL)
+    public function returnURL(string $URL = null)
     {
         if (empty($URL)) {
             return $this->return_url;
@@ -103,7 +103,7 @@ class PayGateWeb
         return $this;
     }
 
-    public function notifyURL(string $URL = NULL)
+    public function notifyURL(string $URL = null)
     {
         if (empty($URL)) {
             return $this->notify_url;
@@ -118,8 +118,8 @@ class PayGateWeb
     {
         $result = $this->doCurlPost($this->getDataWithChecksum(), $this->initiateURL);
 
-        if ($result === FALSE) {
-            return FALSE; /*TODO:: error message ?*/
+        if ($result === false) {
+            return false; /*TODO:: error message ?*/
         }
 
         $response = [];
@@ -137,13 +137,13 @@ class PayGateWeb
         ];
 
         if (!$this->validateChecksum($this->processRequest)) {
-            return FALSE;
+            return false;
         }
 
         return $response;
     }
 
-    public function generateChecksum($postData = NULL)
+    public function generateChecksum($postData = null)
     {
         $checksum = '';
         $this->checksum = '';
@@ -220,7 +220,7 @@ class PayGateWeb
         if (!$this->_is_curl_installed()) {
             $this->lastError = 'cURL is NOT installed on this server. http://php.net/manual/en/curl.setup.php';
 
-            return FALSE;
+            return false;
         }
 
         $fields_string = http_build_query($postData);
@@ -231,8 +231,8 @@ class PayGateWeb
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0); //ssl
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0); //ssl
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-        curl_setopt($ch, CURLOPT_NOBODY, FALSE);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_NOBODY, false);
         curl_setopt($ch, CURLOPT_REFERER, $_SERVER['HTTP_HOST']);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
