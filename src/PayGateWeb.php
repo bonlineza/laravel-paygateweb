@@ -61,7 +61,7 @@ class PayGateWeb
         return $this;
     }
 
-    public function reference(string $stringValue = null)
+    public function reference($stringValue = null)
     {
         if (empty($stringValue)) {
             return $this->reference;
@@ -92,7 +92,7 @@ class PayGateWeb
         return $this;
     }
 
-    public function returnURL(string $URL = null)
+    public function returnURL($URL = null)
     {
         if (empty($URL)) {
             return $this->return_url;
@@ -103,7 +103,7 @@ class PayGateWeb
         return $this;
     }
 
-    public function notifyURL(string $URL = null)
+    public function notifyURL($URL = null)
     {
         if (empty($URL)) {
             return $this->notify_url;
@@ -217,7 +217,7 @@ class PayGateWeb
     public function doCurlPost($postData, $url)
     {
 
-        if (!$this->_is_curl_installed()) {
+        if (!$this->isCurlInstalled()) {
             $this->lastError = 'cURL is NOT installed on this server. http://php.net/manual/en/curl.setup.php';
 
             return false;
@@ -246,7 +246,7 @@ class PayGateWeb
         return $result;
     }
 
-    private function _is_curl_installed()
+    private function isCurlInstalled()
     {
         return (in_array('curl', get_loaded_extensions()));
     }
