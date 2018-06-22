@@ -14,10 +14,10 @@ This was built and tested ONLY on Laravel 5.5, although I'm sure it'll work on p
 composer require misterbrownrsa/laravel-paygateweb
 ```
 
-Since Laravel 5.5 automatically includes the service provider, it won't be necessary to register it. However, if you really want to, run the following command
+Since Laravel 5.5 automatically includes the service provider, it won't be necessary to register it. However, if you really want to, add the following line to your `providers` array in `config/app.php`
 
 ```
-
+MisterBrownRSA\PayGateWeb\PayGateProvider::class
 ```
 
 ##Usage Examples
