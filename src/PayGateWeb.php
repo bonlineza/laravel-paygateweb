@@ -114,6 +114,16 @@ class PayGateWeb
         return $this;
     }
 
+    public function currency($currency = null) {
+        if(empty($currency)) {
+            return $this->currency;
+        }
+
+        $this->currency = $currency;
+
+        return $this;
+    }
+
     public function initiate()
     {
         $result = $this->doCurlPost($this->getDataWithChecksum(), $this->initiateURL);
