@@ -20,7 +20,7 @@ Since Laravel 5.5 automatically includes the service provider, it won't be neces
 MisterBrownRSA\PayGateWeb\PayGateProvider::class
 ```
 
-##Usage Examples
+## Usage Examples
 
 PayGateWeb makes use of the Webv3 API for PayGate, which means it will redirect to their site for payment
 
