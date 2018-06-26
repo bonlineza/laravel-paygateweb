@@ -26,6 +26,12 @@ class PayGateWeb
 
     private $processRequest;
 
+    private $lastError;
+
+    /**
+     * PayGateWeb constructor.
+     * @param array $options
+     */
     public function __construct($options = [])
     {
         $this->encryption_key = getenv('PAYGATE_SECRET') ?: config('paygate.secret', 'secret');
@@ -45,6 +51,10 @@ class PayGateWeb
         }
     }
 
+    /**
+     * @param array $options
+     * @return $this|bool
+     */
     public function create($options = [])
     {
         if (empty($options)) {
@@ -61,6 +71,10 @@ class PayGateWeb
         return $this;
     }
 
+    /**
+     * @param null $stringValue
+     * @return $this
+     */
     public function reference($stringValue = null)
     {
         if (empty($stringValue)) {
@@ -72,6 +86,10 @@ class PayGateWeb
         return $this;
     }
 
+    /**
+     * @param null $floatValue
+     * @return $this
+     */
     public function amount($floatValue = null)
     {
         if (empty($floatValue)) {
@@ -83,6 +101,10 @@ class PayGateWeb
         return $this;
     }
 
+    /**
+     * @param $user
+     * @return $this
+     */
     public function user($user)
     {
         $this->email = $user->email;
@@ -92,6 +114,10 @@ class PayGateWeb
         return $this;
     }
 
+    /**
+     * @param null $URL
+     * @return $this
+     */
     public function returnURL($URL = null)
     {
         if (empty($URL)) {
@@ -103,6 +129,10 @@ class PayGateWeb
         return $this;
     }
 
+    /**
+     * @param null $URL
+     * @return $this
+     */
     public function notifyURL($URL = null)
     {
         if (empty($URL)) {
@@ -114,6 +144,10 @@ class PayGateWeb
         return $this;
     }
 
+    /**
+     * @param null $currency
+     * @return $this
+     */
     public function currency($currency = null) {
         if(empty($currency)) {
             return $this->currency;
@@ -124,6 +158,9 @@ class PayGateWeb
         return $this;
     }
 
+    /**
+     * @return array|bool|string
+     */
     public function initiate()
     {
         $result = $this->doCurlPost($this->getDataWithChecksum(), $this->initiateURL);
@@ -153,6 +190,10 @@ class PayGateWeb
         return $response;
     }
 
+    /**
+     * @param null $postData
+     * @return $this
+     */
     public function generateChecksum($postData = null)
     {
         $checksum = '';
@@ -172,6 +213,10 @@ class PayGateWeb
         return $this;
     }
 
+    /**
+     * @param $data
+     * @return bool
+     */
     public function validateChecksum($data)
     {
         $returnedChecksum = $data['CHECKSUM'];
@@ -184,6 +229,10 @@ class PayGateWeb
         return ($returnedChecksum == $checksum);
     }
 
+    /**
+     * @param $data
+     * @return bool
+     */
     public function validateResponse($data)
     {
         $responseData = [
@@ -197,6 +246,9 @@ class PayGateWeb
         return $this->validateChecksum($responseData);
     }
 
+    /**
+     * @return mixed
+     */
     public function getData()
     {
         /*TODO:: errors perhaps ?*/
@@ -215,6 +267,9 @@ class PayGateWeb
         return $response;
     }
 
+    /**
+     * @return mixed
+     */
     public function getDataWithChecksum()
     {
         $this->generateChecksum();
@@ -224,6 +279,11 @@ class PayGateWeb
         return $response;
     }
 
+    /**
+     * @param $postData
+     * @param $url
+     * @return bool|mixed
+     */
     public function doCurlPost($postData, $url)
     {
 
@@ -256,8 +316,19 @@ class PayGateWeb
         return $result;
     }
 
+    /**
+     * @return bool
+     */
     private function isCurlInstalled()
     {
         return (in_array('curl', get_loaded_extensions()));
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastError()
+    {
+        return $this->lastError;
     }
 }

@@ -4,6 +4,10 @@ namespace MisterBrownRSA\PayGateWeb;
 
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * Class PayGateProvider
+ * @package MisterBrownRSA\PayGateWeb
+ */
 class PayGateProvider extends ServiceProvider
 {
     protected $defer = true;
@@ -36,6 +40,9 @@ class PayGateProvider extends ServiceProvider
         );
     }
 
+    /**
+     * @return array
+     */
     public function provides()
     {
         return [
