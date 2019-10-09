@@ -1,5 +1,5 @@
 {
-    "name": "misterbrownrsa/paygateweb",
+    "name": "bonlineza/paygateweb",
     "description": "Adding PayGateWeb to Laravel IoC for ease of use and laravel flair",
     "license": "MIT",
     "authors": [
